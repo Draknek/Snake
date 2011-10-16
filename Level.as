@@ -19,14 +19,14 @@ package
 		public static const BLANK: uint = 0x68a941;
 		public static const SOLID: uint = 0x265f49;
 		public static const TRAIL: uint = 0x8a520c;
-		public static const SNAKE: uint = 0xf4e46a;
-		public static const HEAD: uint = 0xd97d3c;
+		public static const SNAKE: uint = 0x6fc841;
+		public static const HEAD: uint = 0x389218;
 		
 		public static var food:Point = new Point;
 		
 		public static const so:SharedObject = SharedObject.getLocal(gameID, "/");
 		
-		public static const gameID:String = "shitsnake";
+		public static const gameID:String = "camosnake";
 		
 		public function Level()
 		{}

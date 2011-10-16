@@ -11,7 +11,7 @@ package
 	
 	public class Menu extends World
 	{
-		[Embed(source="shitsnake-menu.png")] public static const MENU: Class;
+		[Embed(source="camosnake-menu.png")] public static const MENU: Class;
 		
 		public function Menu ()
 		{

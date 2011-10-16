@@ -7,7 +7,7 @@ package
 	{
 		public function Main() 
 		{
-			super(48, 32, 20, true);
+			super(48, 32, 15, true);
 			FP.world = new Menu();
 			FP.screen.color = 0xFFFFFF;
 			scaleX = 10;

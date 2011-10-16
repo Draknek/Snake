@@ -25,7 +25,7 @@ package
 		
 		private static const soundData:String = "0.9744,0.5,0.0563,0.0922,,0.1543,0.2809,0.2979,,-0.3727,-0.0327,,0.0533,0.0274,,,-0.0294,0.0415,0.0029,,,-0.012,,-0.0111,0.0027,1,-0.0268,0.0322,,0.078,,0.0052,masterVolume";
 		
-		[Embed(source="shitsnake.mp3")] public static const MUSIC:Class
+		[Embed(source="camosnake.mp3")] public static const MUSIC:Class
 		
 		public var sfx:Sfx;
 		
@@ -166,35 +166,15 @@ package
 				
 				if (eatSound) eatSound.Play();
 				
-				Level.bitmap.setPixel(x, y, Level.BLANK);
+				//Level.bitmap.setPixel(x, y, Level.BLANK);
 				
-				//Level.newFood();
-				
-				p = segments[0];
-				
-				//Level.bitmap.setPixel(p.x, p.y, Level.TRAIL);
-			
-				Level.bitmap.setPixel(x, y, Level.BLANK);
-				
-				Level.food.x = Level.food.y = -2;
+				Level.newFood();
 				
 				var i:int = 0;
-				var j:int = 0;
-				
-				for (; i < 5 && j < segments.length; j++) {
-					p = segments[j];
-					
-					c = Level.bitmap.getPixel(p.x, p.y);
-					
-					if (c != Level.TRAIL) {
-						Level.bitmap.setPixel(p.x, p.y, Level.TRAIL);
-						i++;
-					}
-				}
 				
 				p = segments[0];
 				
-				for (i = 0; i < 2; i++) {
+				for (i = 0; i < 8; i++) {
 					segments.unshift(new Point(p.x, p.y));
 				}
 				
@@ -213,26 +193,22 @@ package
 		{
 			var p: Point = segments[0];
 			
-			FP.buffer.setPixel(p.x, p.y, Level.SNAKE);
-			
 			for (var i:int = 0; i < segments.length; i++) {
 				
 				if (deadShow <= i) {
-					//break;
+					break;
 				}
 				
 				p = segments[segments.length - 1 - i];
 				
 				var c: uint = FP.buffer.getPixel(p.x, p.y);
 				
-				FP.buffer.setPixel(p.x, p.y, deadShow <= i ? Level.TRAIL : Level.SNAKE);
-				
-				FP.buffer.setPixel(p.x, p.y, deadShow > i ? Level.TRAIL : Level.SNAKE);
+				FP.buffer.setPixel(p.x, p.y, Level.SNAKE);
 			}
 			
 			p = segments[0];
 			
-			//FP.buffer.setPixel(p.x, p.y, Level.SNAKE);
+			FP.buffer.setPixel(p.x, p.y, Level.SNAKE);
 			
 			FP.buffer.setPixel(x, y, Level.HEAD);
 			
