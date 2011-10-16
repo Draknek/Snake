@@ -7,6 +7,7 @@ package
 	
 	import flash.display.*;
 	import flash.geom.*;
+	import flash.net.*;
 	
 	public class Level extends World
 	{
@@ -22,6 +23,10 @@ package
 		public static const HEAD: uint = 0xd97d3c;
 		
 		public static var food:Point = new Point;
+		
+		public static const so:SharedObject = SharedObject.getLocal(gameID, "/");
+		
+		public static const gameID:String = "shitsnake";
 		
 		public function Level()
 		{}
@@ -107,7 +112,7 @@ package
 		public override function render (): void
 		{
 			super.render();
-			FP.buffer.setPixel(food.x, food.y, 0xFF0000);
+			if (! player.dead) FP.buffer.setPixel(food.x, food.y, 0xFF0000);
 		}
 	}
 }

@@ -5,6 +5,8 @@ package
 	import net.flashpunk.masks.*;
 	import net.flashpunk.utils.*;
 	
+	import com.increpare.bfxr.Bfxr;
+	
 	import flash.geom.Point;
 	
 	public class Player extends Entity
@@ -19,6 +21,14 @@ package
 		
 		public var score:int = 0;
 		
+		public var eatSound:Bfxr;
+		
+		private static const soundData:String = "0.9744,0.5,0.0563,0.0922,,0.1543,0.2809,0.2979,,-0.3727,-0.0327,,0.0533,0.0274,,,-0.0294,0.0415,0.0029,,,-0.012,,-0.0111,0.0027,1,-0.0268,0.0322,,0.078,,0.0052,masterVolume";
+		
+		[Embed(source="shitsnake.mp3")] public static const MUSIC:Class
+		
+		public var sfx:Sfx;
+		
 		public function Player()
 		{
 			for (var i: int = 2; i < 7; i++) {
@@ -27,6 +37,14 @@ package
 				
 				segments.push(new Point(x, y));
 			}
+			
+			eatSound = new Bfxr();
+			eatSound.Load(soundData);
+			eatSound.CacheMutations(0.05,10);
+			
+			sfx = new Sfx(MUSIC);
+			
+			sfx.loop();
 		}
 		
 		public override function update (): void
@@ -39,11 +57,34 @@ package
 			
 			if (dead) {
 				var full:Boolean = deadShow > segments.length;
-				if (Input.pressed(-1) && full) {
+				if (Input.pressed(Key.SPACE)) {
 					FP.world = new Level();
 				}
 				
-				if (! full) {
+				var best:int = Level.so.data.highscore;
+				
+				var text:Text;
+				
+				if (! graphic) {
+					sfx.stop();
+					
+					text = new Text("Score: " + score + "\nBest: " + best  + "\nHit space", 0, 1, {align:"center", size:8, width: FP.width, height: FP.height});
+					
+					text.relative = false;
+					
+					graphic = text;
+					
+					if (score > best) {
+						best = score;
+						
+						Level.so.data.highscore = best;
+						
+						Level.so.flush();
+					}
+				}
+				
+				if (full) {
+				} else {
 					deadShow += 3;
 				}
 				
@@ -123,6 +164,8 @@ package
 			if (c == 0xFF0000 || c == Level.TRAIL || (Level.food.x == x && Level.food.y == y)) {
 				score += 1;
 				
+				if (eatSound) eatSound.Play();
+				
 				Level.bitmap.setPixel(x, y, Level.BLANK);
 				
 				//Level.newFood();
@@ -192,6 +235,8 @@ package
 			//FP.buffer.setPixel(p.x, p.y, Level.SNAKE);
 			
 			FP.buffer.setPixel(x, y, Level.HEAD);
+			
+			super.render();
 		}
 	}
 }
