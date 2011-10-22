@@ -13,17 +13,21 @@ package
 			super(48, 32, 20, true);
 			FP.world = new Menu();
 			FP.screen.color = 0xFFFFFF;
-			scaleX = 10;
-			scaleY = 10;
+			FP.screen.scale = 10;
+			
+			//FP.console.enable();
 		}
 		
 		public override function init ():void
 		{
 			FP.stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyDown);
+			FP.stage.addEventListener(MouseEvent.MOUSE_DOWN, onMouseDown);
 		}
 		
 		public override function update ():void
 		{
+			Input.mouseCursor = "auto";
+			
 			super.update();
 			
 			nextDir = queueDir;
@@ -43,6 +47,15 @@ package
 				} else if (! queueDir) {
 					queueDir = code;
 				}
+			}
+		}
+		
+		private static function onMouseDown (e:MouseEvent):void
+		{
+			var b:Button = FP.world.collidePoint("button", FP.screen.mouseX, FP.screen.mouseY) as Button;
+			
+			if (b) {
+				b.callback();
 			}
 		}
 	}
