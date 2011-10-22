@@ -102,16 +102,16 @@ package
 			var newDX:int = 0;
 			var newDY:int = 0;
 			
-			if (Input.pressed(Key.LEFT)) {
+			if (Main.nextDir == (Key.LEFT)) {
 				newDX = -1; newDY = 0;
 			}
-			if (Input.pressed(Key.RIGHT)) {
+			if (Main.nextDir == (Key.RIGHT)) {
 				newDX = 1; newDY = 0;
 			}
-			if (Input.pressed(Key.UP)) {
+			if (Main.nextDir == (Key.UP)) {
 				newDX = 0; newDY = -1;
 			}
-			if (Input.pressed(Key.DOWN)) {
+			if (Main.nextDir == (Key.DOWN)) {
 				newDX = 0; newDY = 1;
 			}
 			
