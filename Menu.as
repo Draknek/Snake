@@ -15,14 +15,34 @@ package
 		
 		public function Menu ()
 		{
+			Text.size = 8;
+			Text.align = "center";
+			
 			addGraphic(new Stamp(MENU));
+			
+			addGraphic(new Text("Shit Snake", 0, 1, {color: Level.TRAIL, width: FP.width}));
+			
+			add(new Button("By Alan H", 10, makeURLFunction("http://www.draknek.org/?ref=shitsnake"), Level.SNAKE, Level.HEAD));
+			
+			add(new Button("Start", 20, function ():void { FP.world = new Level; }, 0xFFFFFF, Level.TRAIL));
 		}
 		
 		public override function update ():void
 		{
-			if (Input.pressed(Key.SPACE)) {
+			if (Input.pressed(Key.SPACE) || Input.pressed(Key.ENTER)) {
 				FP.world = new Level;
 			}
+			
+			super.update();
 		}
+		
+		private function makeURLFunction (url:String): Function
+		{
+			return function ():void {
+				var request:URLRequest = new URLRequest(url);
+				navigateToURL(request, "_blank");
+			}
+		}
+		
 	}
 }
