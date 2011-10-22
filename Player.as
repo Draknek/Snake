@@ -68,19 +68,23 @@ package
 				if (! graphic) {
 					sfx.stop();
 					
-					text = new Text("Score: " + score + "\nBest: " + best  + "\nHit space", 0, 1, {align:"center", size:8, width: FP.width, height: FP.height});
-					
-					text.relative = false;
-					
-					graphic = text;
+					var bestText:String = "Best: " + best;
 					
 					if (score > best) {
 						best = score;
+						
+						bestText = "New record";
 						
 						Level.so.data.highscore = best;
 						
 						Level.so.flush();
 					}
+					
+					text = new Text("Score: " + score + "\n" + bestText  + "\nHit space", 1, 1, {align:"center", size:8, width: FP.width, height: FP.height});
+					
+					text.relative = false;
+					
+					graphic = text;
 				}
 				
 				if (full) {
