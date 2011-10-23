@@ -73,7 +73,7 @@ package
 					if (score > best) {
 						best = score;
 						
-						bestText = "New record";
+						bestText = "New best!";
 						
 						Level.so.data.highscore = best;
 						
