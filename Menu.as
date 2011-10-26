@@ -20,11 +20,11 @@ package
 			
 			addGraphic(new Stamp(MENU));
 			
-			addGraphic(new Text("Shit Snake", 0, 1, {color: Level.TRAIL, width: FP.width}));
+			//addGraphic(new Text("Camouflage\nSnake", 0, -1, {color: Level.HEAD, width: FP.width, leading: -1}));
 			
-			add(new Button("By Alan H", 10, makeURLFunction("http://www.draknek.org/?ref=shitsnake"), Level.SNAKE, Level.HEAD));
+			add(new Button("By Alan H", 13, makeURLFunction("http://www.draknek.org/?ref=camosnake"), Level.SNAKE, Level.HEAD));
 			
-			add(new Button("Start", 20, function ():void { FP.world = new Level; }, 0xFFFFFF, Level.TRAIL));
+			add(new Button("Start", 22, function ():void { FP.world = new Level; }, 0xFFFFFF, Level.HEAD));
 		}
 		
 		public override function update ():void
