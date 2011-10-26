@@ -15,7 +15,7 @@ package
 		
 		private static const BORDER_COLOR:uint = 0x265f49;
 		private static const BG_COLOR:uint = 0x68a941;
-		private static const FG_COLOR:uint = 0x8a520c;
+		private static const FG_COLOR:uint = 0x389218;
 		
 		
 		
