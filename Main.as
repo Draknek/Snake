@@ -78,17 +78,20 @@ package
 			
 			super.update();
 			
-			nextDir = queueDir;
-			queueDir = 0;
+			for each (var q:Array in dirQueues) {
+				q.shift();
+			}
 		}
 		
 		public static function getNextDir (id:int):int
 		{
-			return nextDir;
+			var q:Array = dirQueues[id];
+			
+			if (q && q.length) return q[0];
+			else return 0;
 		}
 		
-		public static var nextDir:int = 0;
-		public static var queueDir:int = 0;
+		public static var dirQueues:Array = [];
 		
 		private static function onSwipe(e:*):void {
 			FP.log("swipe");
@@ -114,12 +117,17 @@ package
 			}
 		}
 		
-		private static function addDir (code:int): void
+		private static function addDir (code:int, player:int = 0): void
 		{
-			if (! nextDir) {
-				nextDir = code;
-			} else if (! queueDir) {
-				queueDir = code;
+			var q:Array = dirQueues[player];
+			
+			if (! q) {
+				q = [];
+				dirQueues[player] = q;
+			}
+			
+			if (q.length <= 3) {
+				q.push(code);
 			}
 		}
 		
