@@ -61,36 +61,8 @@ package
 			
 			if (dead) {
 				var full:Boolean = deadShow > segments.length;
-				if (Input.pressed(Key.SPACE)) {
-					FP.world = new Level();
-				}
 				
-				var best:int = Level.so.data.highscore;
-				
-				var text:Text;
-				
-				if (! graphic) {
-					var bestText:String = "Best: " + best;
-					
-					if (score > best) {
-						best = score;
-						
-						bestText = "New best!";
-						
-						Level.so.data.highscore = best;
-						
-						Level.so.flush();
-					}
-					
-					text = new Text("Score: " + score + "\n" + bestText  + "\nHit space", 1, 1, {align:"center", size:8, width: FP.width, height: FP.height});
-					
-					text.relative = false;
-					
-					graphic = text;
-				}
-				
-				if (full) {
-				} else {
+				if (! full) {
 					deadShow += 3;
 				}
 				

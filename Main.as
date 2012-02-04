@@ -13,6 +13,7 @@ package
 		public static var touchscreen:Boolean = false;
 		
 		public static var versus:Boolean = true;
+		public static var flipped:Boolean = true;
 		
 		public function Main() 
 		{
@@ -137,8 +138,13 @@ package
 		{
 			var code:int = e.keyCode;
 			
-			var arrowPlayer:int = 1;
-			var wasdPlayer:int = 0;
+			var arrowPlayer:int = 0;
+			var wasdPlayer:int = 1;
+			
+			if (flipped) {
+				arrowPlayer = 1;
+				wasdPlayer = 0;
+			}
 			
 			if (! versus) {
 				arrowPlayer = wasdPlayer = 0;

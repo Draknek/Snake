@@ -128,6 +128,33 @@ package
 			}
 		}
 		
+		public function addGameOverText (): void
+		{
+			var score:int = players[0].score;
+			
+			var best:int = Level.so.data.highscore;
+			
+			var text:Text;
+			
+			var bestText:String = "Best: " + best;
+			
+			if (score > best) {
+				best = score;
+				
+				bestText = "New best!";
+				
+				Level.so.data.highscore = best;
+				
+				Level.so.flush();
+			}
+			
+			text = new Text("Score: " + score + "\n" + bestText  + "\nHit space", 1, 1, {align:"center", size:8, width: FP.width, height: FP.height});
+			
+			text.relative = false;
+			
+			addGraphic(text);
+		}
+		
 		public override function update (): void
 		{
 			super.update();
@@ -137,8 +164,17 @@ package
 					if (p.dead) {
 						gameover = true;
 						music.stop();
+						
+						addGameOverText();
+						
 						break;
 					}
+				}
+			}
+			
+			if (gameover) {
+				if (Input.pressed(Key.SPACE)) {
+					FP.world = new Level();
 				}
 			}
 		}
