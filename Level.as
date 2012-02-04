@@ -22,7 +22,7 @@ package
 		public static const SNAKE: uint = 0xf4e46a;
 		public static const HEAD: uint = 0xd97d3c;
 		
-		public static var food:Point = new Point;
+		public static var food:Entity;
 		
 		public static const so:SharedObject = SharedObject.getLocal(gameID, "/");
 		
@@ -84,7 +84,13 @@ package
 				}
 			}
 			
+			food = new Entity;
+			
+			food.graphic = new Stamp(new BitmapData(1, 1, false, 0xFF0000));
+			
 			newFood();
+			
+			add(food);
 			
 			add(player);
 		}
@@ -112,7 +118,6 @@ package
 		public override function render (): void
 		{
 			super.render();
-			if (! player.dead) FP.buffer.setPixel(food.x, food.y, 0xFF0000);
 		}
 	}
 }
