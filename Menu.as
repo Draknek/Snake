@@ -22,7 +22,7 @@ package
 			
 			addGraphic(new Text("Shit Snake", 0, 1, {color: Level.TRAIL, width: FP.width}));
 			
-			add(new Button("By Alan H", 10, makeURLFunction("http://www.draknek.org/?ref=shitsnake"), Level.SNAKE, Level.HEAD));
+			//add(new Button("By Alan H", 10, makeURLFunction("http://www.draknek.org/?ref=shitsnake"), Level.SNAKE, Level.HEAD));
 			
 			add(new Button("Start", 20, function ():void { FP.world = new Level; }, 0xFFFFFF, Level.TRAIL));
 		}
