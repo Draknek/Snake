@@ -82,6 +82,11 @@ package
 			queueDir = 0;
 		}
 		
+		public static function getNextDir (id:int):int
+		{
+			return nextDir;
+		}
+		
 		public static var nextDir:int = 0;
 		public static var queueDir:int = 0;
 		

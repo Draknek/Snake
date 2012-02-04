@@ -29,8 +29,12 @@ package
 		
 		public var sfx:Sfx;
 		
+		public var id:int;
+		
 		public function Player(id:int = 0)
 		{
+			this.id = id;
+			
 			for (var i: int = 2; i < 7; i++) {
 				x = i;
 				y = FP.height*0.5;
@@ -108,16 +112,18 @@ package
 			var newDX:int = 0;
 			var newDY:int = 0;
 			
-			if (Main.nextDir == (Key.LEFT)) {
+			var nextDir:int = Main.getNextDir(id);
+			
+			if (nextDir == (Key.LEFT)) {
 				newDX = -1; newDY = 0;
 			}
-			if (Main.nextDir == (Key.RIGHT)) {
+			if (nextDir == (Key.RIGHT)) {
 				newDX = 1; newDY = 0;
 			}
-			if (Main.nextDir == (Key.UP)) {
+			if (nextDir == (Key.UP)) {
 				newDX = 0; newDY = -1;
 			}
-			if (Main.nextDir == (Key.DOWN)) {
+			if (nextDir == (Key.DOWN)) {
 				newDX = 0; newDY = 1;
 			}
 			
