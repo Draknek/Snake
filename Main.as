@@ -12,6 +12,8 @@ package
 	{
 		public static var touchscreen:Boolean = false;
 		
+		public static var versus:Boolean = true;
+		
 		public function Main() 
 		{
 			var w:int;
@@ -135,19 +137,26 @@ package
 		{
 			var code:int = e.keyCode;
 			
+			var arrowPlayer:int = 1;
+			var wasdPlayer:int = 0;
+			
+			if (! versus) {
+				arrowPlayer = wasdPlayer = 0;
+			}
+			
 			if (code >= Key.LEFT && code <= Key.DOWN) {
-				addDir(code);
+				addDir(code, arrowPlayer);
 				return;
 			}
 			
 			if (code == Key.W) {
-				addDir(Key.UP, 1);
+				addDir(Key.UP, wasdPlayer);
 			} else if (code == Key.S) {
-				addDir(Key.DOWN, 1);
+				addDir(Key.DOWN, wasdPlayer);
 			} else if (code == Key.A) {
-				addDir(Key.LEFT, 1);
+				addDir(Key.LEFT, wasdPlayer);
 			} else if (code == Key.D) {
-				addDir(Key.RIGHT, 1);
+				addDir(Key.RIGHT, wasdPlayer);
 			}
 		}
 		
