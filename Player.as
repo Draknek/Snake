@@ -25,10 +25,6 @@ package
 		
 		private static const soundData:String = "0.9744,0.5,0.0563,0.0922,,0.1543,0.2809,0.2979,,-0.3727,-0.0327,,0.0533,0.0274,,,-0.0294,0.0415,0.0029,,,-0.012,,-0.0111,0.0027,1,-0.0268,0.0322,,0.078,,0.0052,masterVolume";
 		
-		[Embed(source="shitsnake.mp3")] public static const MUSIC:Class
-		
-		public var sfx:Sfx;
-		
 		public var id:int;
 		
 		public function Player(id:int = 0)
@@ -53,10 +49,6 @@ package
 			eatSound = new Bfxr();
 			eatSound.Load(soundData);
 			eatSound.CacheMutations(0.05,10);
-			
-			sfx = new Sfx(MUSIC);
-			
-			sfx.loop();
 		}
 		
 		public override function update (): void
@@ -78,8 +70,6 @@ package
 				var text:Text;
 				
 				if (! graphic) {
-					sfx.stop();
-					
 					var bestText:String = "Best: " + best;
 					
 					if (score > best) {
@@ -104,6 +94,10 @@ package
 					deadShow += 3;
 				}
 				
+				return;
+			}
+			
+			if (Level(world).gameover) {
 				return;
 			}
 			

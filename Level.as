@@ -26,6 +26,14 @@ package
 		
 		public static const gameID:String = "shitsnake";
 		
+		public var gameover:Boolean = false;
+		
+		public var players:Array = [];
+		
+		[Embed(source="shitsnake.mp3")] public static const MUSIC:Class
+		
+		public var music:Sfx;
+		
 		public function Level()
 		{}
 		
@@ -92,7 +100,13 @@ package
 				var player:Player = new Player(i);
 			
 				add(player);
+				
+				players.push(player);
 			}
+			
+			music = new Sfx(MUSIC);
+			
+			music.loop();
 		}
 		
 		public static function newFood (): void
@@ -111,6 +125,21 @@ package
 					food.x = x;
 					food.y = y;
 					return;
+				}
+			}
+		}
+		
+		public override function update (): void
+		{
+			super.update();
+			
+			if (! gameover) {
+				for each (var p:Player in players) {
+					if (p.dead) {
+						gameover = true;
+						music.stop();
+						break;
+					}
 				}
 			}
 		}
