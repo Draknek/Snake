@@ -18,6 +18,10 @@ package
 		private static const FG_COLOR:uint = 0x8a520c;
 		
 		
+		// Use this one if you like
+		
+		public static var stage:Stage;
+		
 		
 		// Ignore everything else
 		
@@ -38,6 +42,8 @@ package
 		
 		public function Preloader ()
 		{
+			Preloader.stage = stage;
+			
 			sw = stage.stageWidth;
 			sh = stage.stageHeight;
 			

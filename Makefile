@@ -1,4 +1,4 @@
-OUTPUT := snake.swf
+OUTPUT := shitsnake.swf
 
 ifdef DEBUG
 DEBUG_FLAG := true
