@@ -17,12 +17,11 @@ package
 		public static const BLANK: uint = 0x68a941;
 		public static const SOLID: uint = 0x265f49;
 		public static const TRAIL: uint = 0x8a520c;
+		public static const FOOD: uint = 0xff0000;
 		public static const SNAKE: uint = 0xf4e46a;
 		public static const HEAD: uint = 0xd97d3c;
 		public static const SNAKE2: uint = 0xd97d3c;
 		public static const HEAD2: uint = 0xf4e46a;
-		
-		public static var food:Entity;
 		
 		public static const so:SharedObject = SharedObject.getLocal(gameID, "/");
 		
@@ -90,20 +89,20 @@ package
 				}
 			}
 			
-			food = new Entity;
+			var playerCount:int = Main.versus ? 2 : 1;
 			
-			food.graphic = new Stamp(new BitmapData(1, 1, false, 0xFF0000));
-			
-			newFood();
-			
-			add(food);
-			
-			for (var i:int = 0; i < 2; i++) {
+			for (var i:int = 0; i < playerCount; i++) {
 				var player:Player = new Player(i);
 			
 				add(player);
 				
 				players.push(player);
+				
+				newFood();
+			}
+			
+			if (Main.versus && FP.rand(4) == 0) {
+				newFood();
 			}
 			
 			music = new Sfx(MUSIC);
@@ -123,9 +122,7 @@ package
 				var y: int = minY + Math.random() * spanY;
 				
 				{//if (bitmap.getPixel(x, y) == BLANK) {
-					//bitmap.setPixel(x, y, 0xFF0000);
-					food.x = x;
-					food.y = y;
+					bitmap.setPixel(x, y, FOOD);
 					return;
 				}
 			}

@@ -179,22 +179,16 @@ package
 			
 			var c:uint = Level.bitmap.getPixel(x, y);
 			
-			if (c == 0xFF0000 || c == Level.TRAIL || (Level.food.x == x && Level.food.y == y)) {
+			if (c == 0xFF0000 || c == Level.TRAIL || c == Level.FOOD) {
 				score += 1;
 				
 				if (eatSound) eatSound.Play();
 				
 				Level.bitmap.setPixel(x, y, Level.BLANK);
 				
-				//Level.newFood();
-				
 				p = segments[0];
 				
-				//Level.bitmap.setPixel(p.x, p.y, Level.TRAIL);
-			
 				Level.bitmap.setPixel(x, y, Level.BLANK);
-				
-				Level.food.x = Level.food.y = -2;
 				
 				var i:int = 0;
 				var j:int = 0;
