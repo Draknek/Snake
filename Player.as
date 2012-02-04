@@ -231,28 +231,23 @@ package
 		{
 			var p: Point = segments[0];
 			
-			FP.buffer.setPixel(p.x, p.y, Level.SNAKE);
+			var snakeColor:int = id ? Level.SNAKE2 : Level.SNAKE;
+			var headColor:int = id ? Level.HEAD2 : Level.HEAD;
+			
+			FP.buffer.setPixel(p.x, p.y, snakeColor);
 			
 			for (var i:int = 0; i < segments.length; i++) {
-				
-				if (deadShow <= i) {
-					//break;
-				}
 				
 				p = segments[segments.length - 1 - i];
 				
 				var c: uint = FP.buffer.getPixel(p.x, p.y);
 				
-				FP.buffer.setPixel(p.x, p.y, deadShow <= i ? Level.TRAIL : Level.SNAKE);
-				
-				FP.buffer.setPixel(p.x, p.y, deadShow > i ? Level.TRAIL : Level.SNAKE);
+				FP.buffer.setPixel(p.x, p.y, deadShow > i ? Level.TRAIL : snakeColor);
 			}
 			
 			p = segments[0];
 			
-			//FP.buffer.setPixel(p.x, p.y, Level.SNAKE);
-			
-			FP.buffer.setPixel(x, y, Level.HEAD);
+			FP.buffer.setPixel(x, y, headColor);
 			
 			super.render();
 		}
