@@ -29,7 +29,7 @@ package
 		
 		public var sfx:Sfx;
 		
-		public function Player()
+		public function Player(id:int = 0)
 		{
 			for (var i: int = 2; i < 7; i++) {
 				x = i;
@@ -37,6 +37,8 @@ package
 				
 				segments.push(new Point(x, y));
 			}
+			
+			type = "player";
 			
 			eatSound = new Bfxr();
 			eatSound.Load(soundData);
@@ -153,10 +155,16 @@ package
 			
 			if (dx == 0 && dy == 0) { return; }
 			
-			for each (p in segments) {
-				if (x + dx == p.x && y + dy == p.y) {
-					dead = true;
-					return;
+			var players:Array = [];
+			
+			world.getType("player", players);
+			
+			for each (var player:Player in players) {
+				for each (p in player.segments) {
+					if (x + dx == p.x && y + dy == p.y) {
+						dead = true;
+						return;
+					}
 				}
 			}
 			
