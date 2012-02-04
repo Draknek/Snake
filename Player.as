@@ -36,7 +36,13 @@ package
 			this.id = id;
 			
 			for (var i: int = 2; i < 7; i++) {
-				x = i;
+				if (id == 0) {
+					x = i;
+				} else {
+					x = FP.width - i - 1;
+					dx *= -1;
+				}
+				
 				y = FP.height*0.5;
 				
 				segments.push(new Point(x, y));

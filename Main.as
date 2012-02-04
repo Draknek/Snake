@@ -137,6 +137,17 @@ package
 			
 			if (code >= Key.LEFT && code <= Key.DOWN) {
 				addDir(code);
+				return;
+			}
+			
+			if (code == Key.W) {
+				addDir(Key.UP, 1);
+			} else if (code == Key.S) {
+				addDir(Key.DOWN, 1);
+			} else if (code == Key.A) {
+				addDir(Key.LEFT, 1);
+			} else if (code == Key.D) {
+				addDir(Key.RIGHT, 1);
 			}
 		}
 		

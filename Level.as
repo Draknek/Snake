@@ -11,8 +11,6 @@ package
 	
 	public class Level extends World
 	{
-		public var player: Player;
-		
 		public static var grid: Grid;
 		public static var bitmap: BitmapData;
 		
@@ -63,8 +61,6 @@ package
 			
 			solid.mask = grid;
 			
-			player = new Player();
-			
 			for (var y: int = 0; y < level.height; y++) {
 				for (var x: int = 0; x < level.width; x++) {
 					var colour: uint = 0x00FFFFFF & level.getPixel(x, y);
@@ -92,7 +88,11 @@ package
 			
 			add(food);
 			
-			add(player);
+			for (var i:int = 0; i < 2; i++) {
+				var player:Player = new Player(i);
+			
+				add(player);
+			}
 		}
 		
 		public static function newFood (): void
