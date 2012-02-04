@@ -130,25 +130,57 @@ package
 		
 		public function addGameOverText (): void
 		{
-			var score:int = players[0].score;
+			var message:String;
 			
-			var best:int = Level.so.data.highscore;
+			if (! Main.versus) {
+				var score:int = players[0].score;
 			
-			var text:Text;
+				var best:int = Level.so.data.highscore;
 			
-			var bestText:String = "Best: " + best;
+				var bestText:String = "Best: " + best;
 			
-			if (score > best) {
-				best = score;
+				if (score > best) {
+					best = score;
 				
-				bestText = "New best!";
+					bestText = "New best!";
 				
-				Level.so.data.highscore = best;
+					Level.so.data.highscore = best;
 				
-				Level.so.flush();
+					Level.so.flush();
+				}
+				
+				message = "Score: " + score + "\n" + bestText;
+			} else {
+				var p1:Player = players[0];
+				var p2:Player = players[1];
+				
+				if (p1.dead && p2.dead) {
+					message = "Draw!"
+				} else if (p1.dead) {
+					message = "Right wins!";
+					Main.scores[1]++;
+				} else {
+					message = "Left wins!";
+					Main.scores[0]++;
+				}
+				
+				var leftString:String = "" + Main.scores[0];
+				var rightString:String = "" + Main.scores[1];
+				
+				while (leftString.length < rightString.length) {
+					leftString = " " + leftString;
+				}
+				
+				while (leftString.length > rightString.length) {
+					rightString = rightString + " ";
+				}
+				
+				message += "\n" + leftString + " - " + rightString;
 			}
 			
-			text = new Text("Score: " + score + "\n" + bestText  + "\nHit space", 1, 1, {align:"center", size:8, width: FP.width, height: FP.height});
+			message += "\nHit space";
+			
+			var text:Text = new Text(message, Main.versus ? 0 : 1, 1, {align:"center", size:8, width: FP.width, height: FP.height});
 			
 			text.relative = false;
 			

@@ -15,6 +15,8 @@ package
 		public static var versus:Boolean = true;
 		public static var flipped:Boolean = true;
 		
+		public static var scores:Array = [0, 0];
+		
 		public function Main() 
 		{
 			var w:int;
