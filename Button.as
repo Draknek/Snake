@@ -27,13 +27,17 @@ package
 			
 			graphic = image;
 			
-			setHitbox(image.width - 3, image.height - 5, -1, -2);
+			if (Main.fullscreen) {
+				setHitbox(image.width - 3, image.height - 8, -1, -1);
+			} else {
+				setHitbox(image.width - 3, image.height - 5, -1, -2);
+			}
 			
 			type = "button";
 			
 			callback = _callback;
 			
-			x = (FP.width - image.width) * 0.5;
+			x = int((FP.width - image.width) * 0.5);
 		}
 		
 		public override function update (): void
