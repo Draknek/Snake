@@ -21,7 +21,7 @@ package
 			normalColor = c1;
 			hoverColor = c2;
 			
-			image = new Text(text);
+			image = new Text(text, 0, 0, {leading: 0});
 			
 			image.color = normalColor;
 			

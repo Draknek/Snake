@@ -11,6 +11,8 @@ package
 	
 	public class Menu extends World
 	{
+		public var buttons:Array = [];
+		
 		public function Menu ()
 		{
 			Text.size = 8;
@@ -24,11 +26,32 @@ package
 			
 			addGraphic(new Stamp(bg));
 			
-			addGraphic(new Text("Shit Snake", 0, 1, {color: Level.TRAIL, width: FP.width}));
+			var title:Text = new Text("Shit Snake", 0, 1, {color: Level.TRAIL, width: FP.width, leading: 0});
+			
+			addGraphic(title);
 			
 			//add(new Button("By Alan H", 10, makeURLFunction("http://www.draknek.org/?ref=shitsnake"), Level.SNAKE, Level.HEAD));
 			
-			add(new Button("Start", 20, function ():void { FP.world = new Level; }, 0xFFFFFF, Level.TRAIL));
+			makeButton("1 Player", function ():void { Main.versus = false; FP.world = new Level; });
+			
+			makeButton("2 Player", function ():void { Main.versus = true; FP.world = new Level; });
+			
+			var start:int = title.y + title.height;
+			
+			var padding:int = FP.height - start;
+			
+			for each (var b:Button in buttons) {
+				padding -= b.height;
+			}
+			
+			start += (padding % (buttons.length + 1));
+			
+			padding /= (buttons.length + 1);
+			
+			for each (b in buttons) {
+				b.y = start;
+				start += padding + b.height;
+			}
 		}
 		
 		public override function update ():void
@@ -38,6 +61,17 @@ package
 			}
 			
 			super.update();
+		}
+		
+		private function makeButton (t:String, f:Function): Button
+		{
+			var b:Button = new Button(t, 20, f, 0xFFFFFF, Level.TRAIL);
+			
+			add(b);
+			
+			buttons.push(b);
+			
+			return b;
 		}
 		
 		private function makeURLFunction (url:String): Function

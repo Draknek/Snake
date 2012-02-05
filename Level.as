@@ -182,7 +182,9 @@ package
 			
 			message += "\nHit space";
 			
-			gameOverText = new Text(message, Main.versus ? 0 : 1, 1, {align:"center", size:8, width: FP.width, height: FP.height});
+			gameOverText = new Text(message, Main.versus ? 0 : 1, 1, {align:"center", size:8, width: FP.width});
+			
+			gameOverText.y = (FP.height - gameOverText.height) * 0.5;
 			
 			gameOverText.relative = false;
 			
