@@ -128,6 +128,8 @@ package
 			}
 		}
 		
+		private var gameOverText:Text;
+		
 		public function addGameOverText (): void
 		{
 			var message:String;
@@ -180,11 +182,15 @@ package
 			
 			message += "\nHit space";
 			
-			var text:Text = new Text(message, Main.versus ? 0 : 1, 1, {align:"center", size:8, width: FP.width, height: FP.height});
+			gameOverText = new Text(message, Main.versus ? 0 : 1, 1, {align:"center", size:8, width: FP.width, height: FP.height});
 			
-			text.relative = false;
+			gameOverText.relative = false;
 			
-			addGraphic(text);
+			gameOverText.alpha = 0;
+			
+			addGraphic(gameOverText);
+			
+			FP.alarm(15, function ():void { gameOverText.alpha = 1; });
 		}
 		
 		public override function update (): void
@@ -206,7 +212,11 @@ package
 			
 			if (gameover) {
 				if (Input.pressed(Key.SPACE)) {
-					FP.world = new Level();
+					if (gameOverText.alpha < 0.9) {
+						gameOverText.alpha = 1;
+					} else {
+						FP.world = new Level();
+					}
 				}
 			}
 		}
