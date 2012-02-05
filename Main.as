@@ -18,7 +18,7 @@ package
 		
 		public static var scores:Array = [0, 0];
 		
-		public static var targetScore:int = 10;
+		public static var targetScore:int = 5;
 		
 		[Embed(source = '7x5.ttf', embedAsCFF="false", fontFamily = '7x5')]
 		public static const FONT_7x5:Class;
