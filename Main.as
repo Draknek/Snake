@@ -60,6 +60,11 @@ package
 			FP.screen.color = 0xFFFFFF;
 			FP.screen.scale = scale;
 			
+			if (fullscreen) {
+				x = (Preloader.stage.fullScreenWidth - w * scale) * 0.5;
+				y = (Preloader.stage.fullScreenHeight - h * scale) * 0.5;
+			}
+			
 			//FP.console.enable();
 		}
 		

@@ -38,7 +38,7 @@ package
 			
 			makeButton("2 Player", function ():void { Main.versus = true; FP.world = new Level; });
 			
-			var start:int = title.y + title.height;
+			var start:int = title.y + 7;//title.height;
 			
 			var padding:int = FP.height - start;
 			
@@ -49,6 +49,8 @@ package
 			start += (padding % (buttons.length + 1));
 			
 			padding /= (buttons.length + 1);
+			
+			start += padding;
 			
 			for each (b in buttons) {
 				b.y = start;
