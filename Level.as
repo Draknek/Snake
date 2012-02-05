@@ -221,6 +221,11 @@ package
 					}
 				}
 			}
+			
+			if (Input.pressed(Key.ESCAPE)) {
+				music.stop();
+				FP.world = new Menu;
+			}
 		}
 		
 		public override function render (): void
