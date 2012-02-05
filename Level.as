@@ -40,9 +40,9 @@ package
 		
 		public override function begin (): void
 		{
-			var level: BitmapData = bitmap = new BitmapData(48, 32, false, 0x000000);
+			var level: BitmapData = bitmap = new BitmapData(FP.width, FP.height, false, 0x000000);
 			
-			var rect: Rectangle = new Rectangle(1, 1, 46, 30);
+			var rect: Rectangle = new Rectangle(1, 1, FP.width - 2, FP.height - 2);
 			
 			level.fillRect(rect, 0xFFFFFF);
 			

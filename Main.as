@@ -1,33 +1,44 @@
 package
 {
 	import net.flashpunk.*;
+	import net.flashpunk.graphics.*;
 	import net.flashpunk.utils.*;
 	
 	import flash.events.*;
 	import flash.display.*;
 	import flash.utils.*;
 	
-	[SWF(width = "480", height = "320", backgroundColor="#000000")]
 	public class Main extends Engine
 	{
 		public static var touchscreen:Boolean = false;
+		public static var fullscreen:Boolean = true;
 		
 		public static var versus:Boolean = true;
 		public static var flipped:Boolean = true;
 		
 		public static var scores:Array = [0, 0];
 		
+		[Embed(source = '7x5.ttf', embedAsCFF="false", fontFamily = '7x5')]
+		public static const FONT_7x5:Class;
+		
 		public function Main() 
 		{
 			var w:int;
 			var h:int;
 			
-			var targetW:int = 48;
-			var targetH:int = 32;
-			
 			var scale:int = 10;
 			
 			if (touchscreen) {
+				fullscreen = true;
+			}
+			
+			if (fullscreen) {
+				scale = 16;
+				
+				Text.font = "7x5";
+				
+				Text.defaultLeading = 5;
+				
 				try {
 					Preloader.stage.displayState = StageDisplayState.FULL_SCREEN;
 				} catch (e:Error) {}
@@ -39,15 +50,6 @@ package
 				h = Preloader.stage.stageHeight;
 			}
 			
-			var sizeX:Number = w / targetW;
-			var sizeY:Number = h / targetH;
-		
-			if (sizeX > sizeY) {
-				scale = int(sizeY);
-			} else {
-				scale = int(sizeX);
-			}
-	
 			w = Math.floor(w / scale);
 			h = Math.floor(h / scale);
 			
@@ -57,6 +59,18 @@ package
 			FP.screen.scale = scale;
 			
 			//FP.console.enable();
+		}
+		
+		public override function setStageProperties():void
+		{
+			stage.frameRate = FP.assignedFrameRate;
+			stage.align = StageAlign.TOP_LEFT;
+			stage.quality = StageQuality.HIGH;
+			stage.scaleMode = StageScaleMode.NO_SCALE;
+			
+			if (! fullscreen) {
+				stage.displayState = StageDisplayState.NORMAL;
+			}
 		}
 		
 		public override function init ():void

@@ -11,14 +11,18 @@ package
 	
 	public class Menu extends World
 	{
-		[Embed(source="shitsnake-menu.png")] public static const MENU: Class;
-		
 		public function Menu ()
 		{
 			Text.size = 8;
 			Text.align = "center";
 			
-			addGraphic(new Stamp(MENU));
+			var bg: BitmapData = new BitmapData(FP.width, FP.height, false, Level.SOLID);
+			
+			var rect: Rectangle = new Rectangle(1, 1, FP.width - 2, FP.height - 2);
+			
+			bg.fillRect(rect, Level.BLANK);
+			
+			addGraphic(new Stamp(bg));
 			
 			addGraphic(new Text("Shit Snake", 0, 1, {color: Level.TRAIL, width: FP.width}));
 			
