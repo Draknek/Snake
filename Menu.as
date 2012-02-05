@@ -32,6 +32,8 @@ package
 			
 			//add(new Button("By Alan H", 10, makeURLFunction("http://www.draknek.org/?ref=shitsnake"), Level.SNAKE, Level.HEAD));
 			
+			Main.scores[0] = Main.scores[1] = 0;
+			
 			makeButton("1 Player", function ():void { Main.versus = false; FP.world = new Level; });
 			
 			makeButton("2 Player", function ():void { Main.versus = true; FP.world = new Level; });
@@ -56,10 +58,6 @@ package
 		
 		public override function update ():void
 		{
-			if (Input.pressed(Key.SPACE) || Input.pressed(Key.ENTER)) {
-				FP.world = new Level;
-			}
-			
 			super.update();
 		}
 		

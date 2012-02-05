@@ -28,6 +28,7 @@ package
 		public static const gameID:String = "shitsnake";
 		
 		public var gameover:Boolean = false;
+		public var hasWinner:Boolean = false;
 		
 		public var players:Array = [];
 		
@@ -152,6 +153,8 @@ package
 				}
 				
 				message = "Score: " + score + "\n" + bestText;
+				
+				message += "\nHit space";
 			} else {
 				var p1:Player = players[0];
 				var p2:Player = players[1];
@@ -177,10 +180,13 @@ package
 					rightString = rightString + " ";
 				}
 				
-				message += "\n" + leftString + " - " + rightString;
+				if (Main.scores[0] >= Main.targetScore || Main.scores[1] >= Main.targetScore) {
+					message = "Final score\n" + leftString + " - " + rightString + "\n" + message;
+					hasWinner = true;
+				} else {
+					message += "\n" + leftString + " - " + rightString + "\nHit space";
+				}
 			}
-			
-			message += "\nHit space";
 			
 			gameOverText = new Text(message, Main.versus ? 0 : 1, 1, {align:"center", size:8, width: FP.width});
 			
@@ -217,6 +223,22 @@ package
 					if (gameOverText.alpha < 0.9) {
 						gameOverText.alpha = 1;
 					} else {
+						if (hasWinner) {
+							var parts:Array = gameOverText.text.split("\n");
+							
+							if (parts[0] != parts[2]) {
+								parts[0] = parts[2];
+								gameOverText.text = parts.join("\n");
+							} else if (parts[1] != parts[2]) {
+								parts[1] = parts[2];
+								gameOverText.text = parts.join("\n");
+							} else {
+								FP.world = new Menu();
+							}
+							
+							return;
+						}
+						
 						FP.world = new Level();
 					}
 				}
