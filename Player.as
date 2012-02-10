@@ -210,16 +210,21 @@ package
 			
 			FP.buffer.setPixel(p.x, p.y, snakeColor);
 			
+			var pPrev:Point;
+			
 			for (var i:int = 0; i < segments.length; i++) {
-				
 				p = segments[segments.length - 1 - i];
+				
+				if (pPrev && pPrev.x == p.x && pPrev.y == p.y) {
+					continue;
+				}
+				
+				pPrev = p;
 				
 				var c: uint = FP.buffer.getPixel(p.x, p.y);
 				
 				FP.buffer.setPixel(p.x, p.y, deadShow > i ? shitColor : snakeColor);
 			}
-			
-			p = segments[0];
 			
 			FP.buffer.setPixel(x, y, headColor);
 			

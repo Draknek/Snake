@@ -194,7 +194,7 @@ package
 			gameOverText.x = int((FP.width - gameOverText.width) * 0.5);
 			gameOverText.y = int((FP.height - gameOverText.height) * 0.5);
 			
-			if (gameOverText.x >= 0) {
+			if (Text.font == "default" && gameOverText.x >= 0) {
 				gameOverText.x += 1;
 			}
 			
