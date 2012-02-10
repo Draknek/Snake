@@ -11,7 +11,7 @@ package
 	public class Main extends Engine
 	{
 		public static var touchscreen:Boolean = false;
-		public static var fullscreen:Boolean = true;
+		public static var fullscreen:Boolean = false;
 		
 		public static var versus:Boolean = true;
 		public static var flipped:Boolean = true;
@@ -23,12 +23,14 @@ package
 		[Embed(source = '7x5.ttf', embedAsCFF="false", fontFamily = '7x5')]
 		public static const FONT_7x5:Class;
 		
-		public function Main() 
+		private static var scale:int = 10;
+		
+		public function Main()
 		{
 			var w:int;
 			var h:int;
 			
-			var scale:int = 10;
+			scale = 10;
 			
 			if (touchscreen) {
 				fullscreen = true;
@@ -36,10 +38,6 @@ package
 			
 			if (fullscreen) {
 				scale = 16;
-				
-				Text.font = "7x5";
-				
-				Text.defaultLeading = 5;
 				
 				try {
 					Preloader.stage.displayState = StageDisplayState.FULL_SCREEN;
@@ -56,16 +54,32 @@ package
 			h = Math.floor(h / scale);
 			
 			super(w, h, 20, true);
+			
+			setSize(w, h);
+			
 			FP.world = new Menu();
-			FP.screen.color = 0xFFFFFF;
+			FP.screen.color = Level.SOLID;
 			FP.screen.scale = scale;
 			
-			if (fullscreen) {
-				x = (Preloader.stage.fullScreenWidth - w * scale) * 0.5;
-				y = (Preloader.stage.fullScreenHeight - h * scale) * 0.5;
+			//FP.console.enable();
+		}
+		
+		public static function setSize (w:int, h:int):void
+		{
+			scale = 10;
+			
+			if (w > 48) {
+				scale = 10;
+				Text.font = "7x5";
+				Text.defaultLeading = 5;
+			} else {
+				scale = 14;
+				Text.font = "default";
+				Text.defaultLeading = 2;
 			}
 			
-			//FP.console.enable();
+			FP.width = w;
+			FP.height = h;
 		}
 		
 		public override function setStageProperties():void
@@ -107,6 +121,20 @@ package
 			for each (var q:Array in dirQueues) {
 				q.shift();
 			}
+		}
+		
+		public override function render ():void
+		{
+			super.render();
+			
+			FP.screen.scale = scale;
+			
+			var sw:int = fullscreen ? Preloader.stage.fullScreenWidth : Preloader.stage.stageWidth;
+			var sh:int = fullscreen ? Preloader.stage.fullScreenHeight : Preloader.stage.stageHeight;
+			
+			FP.engine.x = (sw - FP.width * scale) * 0.5;
+			FP.engine.y = (sh - FP.height * scale) * 0.5;
+			
 		}
 		
 		public static function getNextDir (id:int):int

@@ -15,6 +15,8 @@ package
 		
 		public function Menu ()
 		{
+			Main.setSize(64, 48);
+			
 			Text.size = 8;
 			Text.align = "center";
 			
@@ -34,11 +36,13 @@ package
 			
 			Main.scores[0] = Main.scores[1] = 0;
 			
-			makeButton("1 Player", function ():void { Main.versus = false; FP.world = new Level; });
+			makeButton("1 Player", function ():void { Main.setSize(45, 34); Main.versus = false; FP.world = new Level; });
 			
 			makeButton("2 Player", function ():void { Main.versus = true; FP.world = new Level; });
 			
-			var start:int = title.y + 7;//title.height;
+			makeButton("About", function ():void {  });
+			
+			var start:int = title.y + ((Text.font == '7x5') ? 7 : 5);
 			
 			var padding:int = FP.height - start;
 			

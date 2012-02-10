@@ -191,7 +191,12 @@ package
 			
 			gameOverText = new Text(message, Main.versus ? 0 : 1, 1, {align:"center", size:8, width: FP.width});
 			
-			gameOverText.y = (FP.height - gameOverText.height) * 0.5;
+			gameOverText.x = int((FP.width - gameOverText.width) * 0.5);
+			gameOverText.y = int((FP.height - gameOverText.height) * 0.5);
+			
+			if (gameOverText.x >= 0) {
+				gameOverText.x += 1;
+			}
 			
 			gameOverText.relative = false;
 			

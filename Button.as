@@ -27,7 +27,7 @@ package
 			
 			graphic = image;
 			
-			if (Main.fullscreen) {
+			if (Text.font == "7x5") {
 				setHitbox(image.width - 3, image.height - 8, -1, -1);
 			} else {
 				setHitbox(image.width - 3, image.height - 5, -1, -2);
