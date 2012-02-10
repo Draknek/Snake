@@ -151,16 +151,23 @@ package
 			
 			var c:uint = Level.bitmap.getPixel(x, y);
 			
-			if (c == 0xFF0000 || c == Level.TRAIL || c == Level.FOOD) {
+			var myShit:int = id ? Level.SHIT2 : Level.TRAIL;
+			var theirShit:int = id ? Level.TRAIL : Level.SHIT2;
+			
+			if (! Main.versus) {
+				theirShit = myShit;
+			}
+			
+			if (c == 0xFF0000 || c == theirShit || c == Level.FOOD) {
 				score += 1;
 				
 				if (eatSound) eatSound.Play();
 				
-				Level.bitmap.setPixel(x, y, Level.BLANK);
+				Level.bitmap.setPixel(x, y, myShit);
 				
 				p = segments[0];
 				
-				Level.bitmap.setPixel(x, y, Level.BLANK);
+				Level.bitmap.setPixel(x, y, myShit);
 				
 				var i:int = 0;
 				var j:int = 0;
@@ -170,8 +177,8 @@ package
 					
 					c = Level.bitmap.getPixel(p.x, p.y);
 					
-					if (c != Level.TRAIL) {
-						Level.bitmap.setPixel(p.x, p.y, Level.TRAIL);
+					if (c != myShit) {
+						Level.bitmap.setPixel(p.x, p.y, myShit);
 						i++;
 					}
 				}
@@ -199,6 +206,7 @@ package
 			
 			var snakeColor:int = id ? Level.SNAKE2 : Level.SNAKE;
 			var headColor:int = id ? Level.HEAD2 : Level.HEAD;
+			var shitColor:int = id ? Level.SHIT2 : Level.TRAIL;
 			
 			FP.buffer.setPixel(p.x, p.y, snakeColor);
 			
@@ -208,7 +216,7 @@ package
 				
 				var c: uint = FP.buffer.getPixel(p.x, p.y);
 				
-				FP.buffer.setPixel(p.x, p.y, deadShow > i ? Level.TRAIL : snakeColor);
+				FP.buffer.setPixel(p.x, p.y, deadShow > i ? shitColor : snakeColor);
 			}
 			
 			p = segments[0];

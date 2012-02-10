@@ -22,6 +22,7 @@ package
 		public static const HEAD: uint = 0xd97d3c;
 		public static const SNAKE2: uint = 0xd97d3c;
 		public static const HEAD2: uint = 0xf4e46a;
+		public static const SHIT2: uint = 0x9c6a2b;
 		
 		public static const so:SharedObject = SharedObject.getLocal(gameID, "/");
 		
