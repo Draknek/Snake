@@ -40,7 +40,7 @@ package
 			
 			makeButton("2 Player", function ():void { Main.versus = true; FP.world = new Level; });
 			
-			makeButton("About", function ():void {  });
+			makeButton("About", function ():void { toggleAbout(); });
 			
 			var start:int = title.y + ((Text.font == '7x5') ? 7 : 5);
 			
@@ -59,6 +59,17 @@ package
 			for each (b in buttons) {
 				b.y = start;
 				start += padding + b.height;
+			}
+			
+			makeButton("By Alan H", makeURLFunction("http://www.draknek.org/?ref=shitsnake"));
+			
+			makeButton("Mus: Aaron K", makeURLFunction("http://twitter.com/captain_panties"));
+			
+			makeButton("Back", function ():void { toggleAbout(); });
+			
+			for (var i:int = 0; i < 3; i++) {
+				buttons[i+3].y = buttons[i].y;
+				buttons[i+3].visible = buttons[i+3].collidable = false;
 			}
 		}
 		
@@ -83,6 +94,13 @@ package
 			return function ():void {
 				var request:URLRequest = new URLRequest(url);
 				navigateToURL(request, "_blank");
+			}
+		}
+		
+		private function toggleAbout ():void
+		{
+			for each (var b:Button in buttons) {
+				b.visible = b.collidable = ! b.visible;
 			}
 		}
 		
